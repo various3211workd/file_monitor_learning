@@ -8,7 +8,7 @@ pub fn debug_check() -> bool {
 
     system.refresh_all();
 
-    for(pid, proc_) in system.get_process_list(){
+    for(_, proc_) in system.get_process_list(){
         //println!("{}:{} => status: {:?}", pid, proc_.name(), proc_.status());
         match proc_.name() {
             "ollydbg.exe" | "x32dbg.exe" | "x64dbg.exe" => {

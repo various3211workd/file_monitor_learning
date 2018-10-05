@@ -1,23 +1,23 @@
 extern crate notify;
 
-use notify::{Watcher, RecursiveMode, watcher};
+use notify::{Watcher, RecursiveMode, RawEvent, raw_watcher};
 use std::sync::mpsc::channel;
-use std::time::Duration;
 
-//pub fn file_monitor(){
-pub fn file_monitor(folder_name: &str){
+pub fn run(folder_name: &str){
     let (tx, rx) = channel();
-
-    let mut watcher = watcher(
-        tx, Duration::from_secs(10)).unwrap();
+    
+    let mut watcher = raw_watcher(tx).unwrap();
 
     watcher.watch(folder_name, 
         RecursiveMode::Recursive).unwrap();
 
     loop {
         match rx.recv() {
-           Ok(event) => println!("{:?}", event),
-           Err(e) => println!("watch error: {:?}", e),
+            Ok(RawEvent{path: Some(path), op: Ok(op), cookie: _}) => {
+                println!("[ * ] {:?} -> {:?}", op, path);
+            },
+            Ok(event) => println!("broken event: {:?}", event),
+            Err(e) => println!("watch error: {:?}", e),
         }
     }
 }
