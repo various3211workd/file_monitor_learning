@@ -7,9 +7,12 @@ use std::string::*;
 
 mod secure;
 mod monitor;
+mod client;
 
 fn main() {
     run();
+    //let s: String = "test".to_string();
+    //client::send(s);
 }
 
 fn run(){

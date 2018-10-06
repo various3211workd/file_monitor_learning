@@ -3,6 +3,9 @@ extern crate notify;
 use notify::{Watcher, RecursiveMode, RawEvent, raw_watcher};
 use std::sync::mpsc::channel;
 
+use super::*;
+//mod client;
+
 pub fn run(folder_name: String){
     let (tx, rx) = channel();
     
@@ -14,7 +17,13 @@ pub fn run(folder_name: String){
     loop {
         match rx.recv() {
             Ok(RawEvent{path: Some(path), op: Ok(op), cookie: _}) => {
-                println!("[ * ] {:?} -> {:?}", op, path);
+                let line: String = 
+                    format!("{}{:?}{:?}",
+                        "[ * ] ".to_string(), 
+                        op, 
+                        path);
+                println!("{}", line);
+                client::send(line);
             },
             Ok(event) => println!("broken event: {:?}", event),
             Err(e) => println!("watch error: {:?}", e),
