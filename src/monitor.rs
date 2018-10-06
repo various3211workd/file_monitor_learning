@@ -3,7 +3,7 @@ extern crate notify;
 use notify::{Watcher, RecursiveMode, RawEvent, raw_watcher};
 use std::sync::mpsc::channel;
 
-pub fn run(folder_name: &str){
+pub fn run(folder_name: String){
     let (tx, rx) = channel();
     
     let mut watcher = raw_watcher(tx).unwrap();
