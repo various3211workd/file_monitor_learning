@@ -1,3 +1,5 @@
+extern crate monitor_server;
+
 use std::io::*;
 use std::net::{TcpListener, TcpStream, SocketAddr};
 
@@ -24,6 +26,12 @@ fn handle_connection(stream: TcpStream) {
     let line: String = 
         String::from_utf8(buf.to_vec()).unwrap();
 
+    /*match line {
+        "first_session".to_string() => {
+
+        }
+        _ => { println!("{}", line); }
+    }*/
     println!("{}", line);
 }
 
@@ -38,13 +46,9 @@ fn run() -> Result<()> {
     for stream in listener.incoming() {
         match stream {
             Ok(s) => {
-                // do something with the TcpStream
                 handle_connection(s);
             }
             Err(ref e) if e.kind() == ErrorKind::WouldBlock => {
-                // wait until network socket is ready, typically implemented
-                // via platform-specific APIs such as epoll or IOCP
-                //wait_for_fd();
                 continue;
             }
             Err(e) => panic!("encountered IO error: {}", e),

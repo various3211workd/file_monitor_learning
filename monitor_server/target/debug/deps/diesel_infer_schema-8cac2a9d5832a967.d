@@ -1,0 +1,10 @@
+C:\Rust\filemonitor\monitor_server\target\debug\deps\libdiesel_infer_schema-8cac2a9d5832a967.rlib: C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\lib.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\codegen.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\data_structures.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\inference.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\table_data.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\sqlite.rs
+
+C:\Rust\filemonitor\monitor_server\target\debug\deps\diesel_infer_schema-8cac2a9d5832a967.d: C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\lib.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\codegen.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\data_structures.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\inference.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\table_data.rs C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\sqlite.rs
+
+C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\lib.rs:
+C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\codegen.rs:
+C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\data_structures.rs:
+C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\inference.rs:
+C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\table_data.rs:
+C:\Users\ToDo\.cargo\registry\src\github.com-1ecc6299db9ec823\diesel_infer_schema-0.15.0\src\sqlite.rs:

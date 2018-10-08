@@ -1,39 +1,39 @@
+extern crate monitor_client;
+
 use std::env;
 use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;
+use std::io::*;
 use std::thread;
 use std::string::*;
 
-mod secure;
-mod monitor;
-mod client;
+use monitor_client::modules::*;
 
 fn main() {
-    run();
-    //let s: String = "test".to_string();
-    //client::send(s);
+    match run() {
+        Ok(_) => (),
+        Err(e) => println!("{:?}", e),
+    }
 }
 
-fn run(){
+fn run() -> Result<()> {
+    session_check::check();
+
     let args: Vec<String> = 
         env::args().collect::<Vec<String>>();
 
     if secure::debug_check() {
         println!("No Used Debbugger");
-        return 
     }
     else if args.len() < 2 {
         
         match read_watch_list() {
-            Ok(_s) => {}
-            Err(_why) => {
-                //println!("{}", why.to_string())
+            Ok(_) => {}
+            Err(_) => {
                 puts_help();
             }
         };
     }
-    else if args[1] != "watch_list" { // コマンドラインからの読み込み
+    else  { // コマンドラインからの読み込み
         for line in args {
             println!("[ * ] starting {} monitor", 
                 line);
@@ -61,6 +61,7 @@ fn run(){
             }
         }
     }
+    Ok(())
 }
 
 fn read_watch_list() -> std::io::Result<()> {
