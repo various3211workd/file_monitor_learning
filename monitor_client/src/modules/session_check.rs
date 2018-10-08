@@ -1,41 +1,43 @@
-use std::env;
+//use std::env;
 use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;
-use std::string::*;
+//use std::io::prelude::*;
+//use std::string::*;
+use std::io::{BufWriter, Write};
+//use std::io::{BufReader, Read};
 
 use super::*;
 
 pub fn check() -> std::io::Result<()> {
-    match open_event() {
-        Ok(_) => (),
-        Err(e) => {
-            first_session();
-        }
-    }
+    open_event();
 
     Ok(())
 }
 
 fn open_event() -> std::io::Result<()> {
-    let mut f = match File::open("event.dump"){
+    let mut _f = match File::open("event.dump"){
         Ok(_) => {
 
         }
         Err(_) => {
-            first_session();
+            //first_session();
         }
     };
     Ok(())
 }
 
 fn first_session() -> std::io::Result<()> {
-    let mut f = File::create("event.dump");
+    let f = File::create("event.dump").unwrap();
 
-    let mut message: String = 
+    let message: String = 
         "[FIRST_CON]".to_string();
 
     network::send(message);
+    let message: String = network::read();
+
+    let mut bf = BufWriter::new(f);
+    for _ in 0 .. 100 {
+        bf.write(message.as_bytes()).unwrap();
+    }
 
     Ok(())
 }

@@ -16,7 +16,7 @@ fn main() {
 }
 
 fn run() -> Result<()> {
-    session_check::check();
+    //session_check::check();
 
     let args: Vec<String> = 
         env::args().collect::<Vec<String>>();

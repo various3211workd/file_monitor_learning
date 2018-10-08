@@ -3,6 +3,8 @@ extern crate monitor_server;
 use std::io::*;
 use std::net::{TcpListener, TcpStream, SocketAddr};
 
+use monitor_server::modules::*;
+
 fn main() {
     match run() {
         Ok(_) => (),
@@ -26,13 +28,8 @@ fn handle_connection(stream: TcpStream) {
     let line: String = 
         String::from_utf8(buf.to_vec()).unwrap();
 
-    /*match line {
-        "first_session".to_string() => {
-
-        }
-        _ => { println!("{}", line); }
-    }*/
-    println!("{}", line);
+    check_work::work(line);
+    //println!("{}", line);
 }
 
 fn run() -> Result<()> {
