@@ -1,10 +1,9 @@
 extern crate monitor_client;
 
-use std::env;
-use std::fs::File;
 use std::io::*;
+use std::fs::*;
+use std::env;
 use std::thread;
-use std::string::*;
 
 use monitor_client::modules::*;
 
@@ -15,8 +14,13 @@ fn main() {
     }
 }
 
+#[warn(unused_must_use)]
 fn run() -> Result<()> {
-    //session_check::check();
+    
+    match session_check::check(){
+        Ok(_) => { }
+        Err(_) => { }
+    }
 
     let args: Vec<String> = 
         env::args().collect::<Vec<String>>();
@@ -33,7 +37,7 @@ fn run() -> Result<()> {
             }
         };
     }
-    else  { // コマンドラインからの読み込み
+    else { // コマンドラインからの読み込み
         for line in args {
             println!("[ * ] starting {} monitor", 
                 line);

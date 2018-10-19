@@ -1,9 +1,10 @@
 extern crate monitor_server;
 
 use std::io::*;
-use std::net::{TcpListener, TcpStream, SocketAddr};
-
-use monitor_server::modules::*;
+use std::net::*;
+use rand::Rng;
+use std::thread;
+use std::{fs, mem};
 
 fn main() {
     match run() {
@@ -15,6 +16,7 @@ fn main() {
 fn handle_connection(stream: TcpStream) {
     let mut stream = stream;
     stream.set_nonblocking(true).expect("set_nonblocking call failed");
+    let addr = stream.peer_addr().unwrap();
 
     let mut buf = vec![];
     loop {
@@ -27,35 +29,45 @@ fn handle_connection(stream: TcpStream) {
     };
     let line: String = 
         String::from_utf8(buf.to_vec()).unwrap();
+    
+    let message = line.to_string();
+    
+    match &*message {
+        "[FIRST_CON]" => {
+        
+            let id: String;
 
-    check_work::work(line);
-    //println!("{}", line);
-}
+            id = rand::thread_rng()
+                .gen_ascii_chars()
+                .take(32)
+                .collect::<String>();
 
-fn run() -> Result<()> {
-    let addrs = [
-        SocketAddr::from(([127, 0, 0, 1], 12749)),
-    ];
+            let line: String = 
+                format!("{}{}", "[ + ] ".to_string(), id);
 
-    let listener = TcpListener::bind(&addrs[..]).unwrap();
-    listener.set_nonblocking(true).expect("Cannot set non-blocking");
-
-    for stream in listener.incoming() {
-        match stream {
-            Ok(s) => {
-                handle_connection(s);
-            }
-            Err(ref e) if e.kind() == ErrorKind::WouldBlock => {
-                continue;
-            }
-            Err(e) => panic!("encountered IO error: {}", e),
+            let bytes: &[u8] = line.as_bytes();
+            println!("{}", line);
+            stream.write(bytes);
+        }
+        _ => {
+            println!("{} -> {}", addr, message);
+            putfile(addr.to_string(), message);
         }
     }
-    Ok(())
 }
 
-/*
-#[warn(unused_must_use)]
+fn putfile(addr: String, message: String) {
+
+    let filename = addr.split(":").collect::<Vec<&str>>();
+
+    let mut f = BufWriter::new(
+        fs::File::create(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
+    
+    for _ in 0 .. 100 {
+        f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
+    }
+}
+
 fn run() -> Result<()> {
     let addrs = [
         SocketAddr::from(([127, 0, 0, 1], 12749)),
@@ -64,20 +76,21 @@ fn run() -> Result<()> {
     let listener = TcpListener::bind(&addrs[..]).unwrap();
     listener.set_nonblocking(true).expect("Cannot set non-blocking");
 
+    loop {
         for stream in listener.incoming() {
-            let mut stream = match stream {
-                Ok(stream) => { stream }
+            match stream {
+                Ok(s) => {
+                    thread::spawn(move || {
+                        handle_connection(s);
+                    });
+                }
                 Err(ref e) if e.kind() == ErrorKind::WouldBlock => {
                     continue;
                 }
                 Err(e) => panic!("encountered IO error: {}", e),
-            };
-
-            let test: &str = "Test";
-            let bytes: &[u8] = test.as_bytes();
-            stream.write(bytes);
+            }
         }
 
+    }
     Ok(())
 }
-*/

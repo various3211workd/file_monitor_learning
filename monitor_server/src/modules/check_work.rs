@@ -1,9 +1,11 @@
 extern crate rand;
 
-use std::{fs, mem};
-use std::io::{BufWriter, Write};
-use std::io::{BufReader, Read};
+//use std::{fs, mem};
+//use std::io::{BufWriter, Write};
+//use std::io::{BufReader, Read};
 use rand::Rng;
+
+use super::*;
 
 pub fn work(work: String) {
     let message = work.to_string();
@@ -19,14 +21,12 @@ pub fn work(work: String) {
                 .collect::<String>();
 
             let line: String = 
-                    format!("{}{}",
-                        "[ + ] ".to_string(),  
-                        id);
+                format!("{}{}", "[ + ] ".to_string(), id);
 
             println!("{}", line);
+            
         }
         _ => {
-
         }
     }
 }

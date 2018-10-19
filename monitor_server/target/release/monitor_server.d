@@ -1,0 +1,1 @@
+C:\Rust\filemonitor\monitor_server\target\release\monitor_server.pdb: C:\Rust\filemonitor\monitor_server\src\lib.rs C:\Rust\filemonitor\monitor_server\src\main.rs C:\Rust\filemonitor\monitor_server\src\modules\check_work.rs C:\Rust\filemonitor\monitor_server\src\modules\mod.rs

@@ -1,0 +1,6 @@
+monitor_server/log/
+monitor_server/target
+
+monitor_client/watch_list
+monitor_client/event.dump
+monitor_client/target
