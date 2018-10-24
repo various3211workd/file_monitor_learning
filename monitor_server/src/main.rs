@@ -61,11 +61,12 @@ fn putfile(addr: String, message: String) {
     let filename = addr.split(":").collect::<Vec<&str>>();
 
     let mut f = BufWriter::new(
-        fs::File::create(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
-    
-    for _ in 0 .. 100 {
-        f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
-    }
+        fs::OpenOptions::new().write(true).create(true).append(true).open(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
+
+    //let mut f = BufWriter::new(
+    //    fs::File::create(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
+
+    f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
 }
 
 fn run() -> Result<()> {
