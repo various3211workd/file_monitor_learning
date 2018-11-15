@@ -63,9 +63,6 @@ fn putfile(addr: String, message: String) {
     let mut f = BufWriter::new(
         fs::OpenOptions::new().write(true).create(true).append(true).open(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
 
-    //let mut f = BufWriter::new(
-    //    fs::File::create(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
-
     f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
 }
 

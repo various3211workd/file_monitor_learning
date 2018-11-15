@@ -49,7 +49,7 @@ fn run() -> Result<()> {
         }
     }
 
-    let scan = std::io::stdin();
+    let scan = stdin();
 
     loop{
         let mut line = String::new();

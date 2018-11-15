@@ -4,7 +4,6 @@ use notify::{Watcher, RecursiveMode, RawEvent, raw_watcher};
 use std::sync::mpsc::channel;
 
 use super::*;
-//mod client;
 
 pub fn run(folder_name: String){
     let (tx, rx) = channel();
@@ -30,3 +29,4 @@ pub fn run(folder_name: String){
         }
     }
 }
+

@@ -9,8 +9,7 @@ pub fn read() -> String {
     
     let mut stream = TcpStream::connect(&addrs[..])
         .expect("Couldn't connect to the server...");
-    //stream.set_nonblocking(true).expect("set_nonblocking call failed");
-    
+
     let mut buf = vec![];
 
     loop {  // ここで止まる
@@ -29,7 +28,6 @@ pub fn read() -> String {
         .expect("shutdown call failed");
 
     line
-    
 }
 
 pub fn send(line: String) {
@@ -39,7 +37,6 @@ pub fn send(line: String) {
 
     let mut stream = TcpStream::connect(&addrs[..])
         .expect("Couldn't connect to the server...");
-    //stream.set_nonblocking(true).expect("set_nonblocking call failed");
 
     let bytes: &[u8] = line.as_bytes();
     loop {

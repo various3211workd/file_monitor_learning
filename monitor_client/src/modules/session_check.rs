@@ -30,7 +30,7 @@ pub fn check() -> std::io::Result<()> {
         };
 
         let mut buf = vec![];
-        loop {  // ここで止まる
+        loop {
             match stream.read_to_end(&mut buf) {
                 Ok(_) => break,
                 Err(ref e) if e.kind() == ErrorKind::WouldBlock => {
