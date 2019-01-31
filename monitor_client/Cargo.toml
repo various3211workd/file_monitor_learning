@@ -1,9 +1,0 @@
-[package]
-name = "monitor_client"
-version = "0.1.0"
-authors = ["various3211workd <kd1229568@st.kobedenshi.ac.jp>"]
-edition = "2018"
-
-[dependencies]
-sysinfo = "*"
-notify = "*"

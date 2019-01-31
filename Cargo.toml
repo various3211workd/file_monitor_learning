@@ -1,0 +1,13 @@
+[package]
+name = "moni"
+version = "0.1.0"
+authors = ["various3211workd <kd1229568@st.kobedenshi.ac.jp>"]
+edition = "2018"
+
+[dependencies]
+docopt = "0.8"
+serde = "1.0"
+serde_derive = "1.0"
+
+sysinfo = "*"
+notify = "*"
