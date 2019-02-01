@@ -42,7 +42,9 @@ fn main() {
       // start monitoring on watch file
       0 => {
         let file = match File::open("watch_list") {
-          Err(why) => panic!("{}", &why),
+          Err(_why) => {
+            panic!("[Error]Not Found watch_list");
+          },
           Ok(file) => file,
         };
         let buf_reader = BufReader::new(file);

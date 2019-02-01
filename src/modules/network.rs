@@ -1,6 +1,11 @@
 use std::io::*;
 use std::net::{TcpStream, SocketAddr, Shutdown};
 
+/*
+  read function
+
+  return String
+*/
 pub fn read() -> String {
   
   let addrs = [
@@ -12,7 +17,7 @@ pub fn read() -> String {
 
   let mut buf = vec![];
 
-  loop {  // ここで止まる
+  loop {
     match stream.read_to_end(&mut buf) {
       Ok(_) => break,
       Err(ref e) if e.kind() == ErrorKind::WouldBlock => {
@@ -30,6 +35,10 @@ pub fn read() -> String {
   line
 }
 
+
+/*
+  send function
+*/
 pub fn send(line: String) {
   let addrs = [
     SocketAddr::from(([127, 0, 0, 1], 12749)),

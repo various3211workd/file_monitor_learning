@@ -6,10 +6,15 @@ use notify::{
   RawEvent, 
   raw_watcher
 };
-use std::sync::mpsc::channel;
 
+use std::sync::mpsc::channel;
 use super::*;
 
+/*
+  run function
+
+  start file monitor
+*/
 pub fn run(folder_name: String){
   let (tx, rx) = channel();
   
