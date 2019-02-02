@@ -6,17 +6,9 @@ use std::net::{TcpStream, SocketAddr, Shutdown};
 
   return String
 */
-pub fn read() -> String {
-  
-  let addrs = [
-    SocketAddr::from(([127, 0, 0, 1], 12749)),
-  ];
-  
-  let mut stream = TcpStream::connect(&addrs[..])
-    .expect("Couldn't connect to the server...");
+pub fn read(mut stream: TcpStream) -> String {
 
   let mut buf = vec![];
-
   loop {
     match stream.read_to_end(&mut buf) {
       Ok(_) => break,
@@ -25,12 +17,8 @@ pub fn read() -> String {
       Err(e) => panic!("encountered IO error: {}", e),
     };
   };
-
   let line: String = 
     String::from_utf8(buf.to_vec()).unwrap();
-
-  stream.shutdown(Shutdown::Both)
-    .expect("shutdown call failed");
 
   line
 }

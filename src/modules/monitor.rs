@@ -16,6 +16,8 @@ use super::*;
   start file monitor
 */
 pub fn run(folder_name: String){
+  println!("[START Monitoring] {}", folder_name);
+  
   let (tx, rx) = channel();
   
   let mut watcher = raw_watcher(tx).unwrap();

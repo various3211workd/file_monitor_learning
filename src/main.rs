@@ -17,7 +17,7 @@ Usage:
   moni (--help | --version)
 
 Options:
-  -l, --listen   Listen port
+  -l, --listen   Server Listen
   -h, --help     Show this screen
   -v, --version  Show version
 ";
@@ -35,7 +35,7 @@ fn main() {
     .unwrap_or_else(|e| e.exit());
 
   if args.flag_listen {
-    listen_server::listen();
+    listen_server::run();
   }
   else {
     match args.arg_path.len() {

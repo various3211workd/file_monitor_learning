@@ -3,7 +3,9 @@ use std::net::*;
 use std::fs;
 use std::io::*;
 
-pub fn listen() {
+use super::*;
+
+pub fn run() {
   let addrs = [
     SocketAddr::from(([127, 0, 0, 1], 12749)),
   ];
@@ -31,22 +33,10 @@ pub fn listen() {
 fn handle_connection(stream: TcpStream) {
   let mut stream = stream;
   stream.set_nonblocking(true).expect("set_nonblocking call failed");
-  let addr = stream.peer_addr().unwrap();
 
-  let mut buf = vec![];
-  loop {
-    match stream.read_to_end(&mut buf) {
-      Ok(_) => break,
-      Err(ref e) if e.kind() == ErrorKind::WouldBlock => {
-      }
-      Err(e) => panic!("encountered IO error: {}", e),
-    };
-  };
-  let line: String = 
-    String::from_utf8(buf.to_vec()).unwrap();
-  
-  let message = line.to_string();
-  
+  let addr = stream.peer_addr().unwrap();
+  let message = network::read(stream).to_string();
+
   match &*message {
     _ => {
       println!("{} -> {}", addr, message);
@@ -63,5 +53,5 @@ fn putfile(addr: String, message: String) {
   let mut f = BufWriter::new(
     fs::OpenOptions::new().write(true).create(true).append(true).open(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
 
-  f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
+  f.write_all(message.as_bytes()).unwrap();
 }
