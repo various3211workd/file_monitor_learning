@@ -5,6 +5,9 @@ use std::io::*;
 
 use super::*;
 
+/*
+  run
+*/
 pub fn run() {
   let addrs = [
     SocketAddr::from(([127, 0, 0, 1], 12749)),
@@ -35,7 +38,7 @@ fn handle_connection(stream: TcpStream) {
   stream.set_nonblocking(true).expect("set_nonblocking call failed");
 
   let addr = stream.peer_addr().unwrap();
-  let message = network::read(stream).to_string();
+  let message = network::readFunc(stream).to_string();
 
   match &*message {
     _ => {
@@ -53,5 +56,5 @@ fn putfile(addr: String, message: String) {
   let mut f = BufWriter::new(
     fs::OpenOptions::new().write(true).create(true).append(true).open(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
 
-  f.write_all(message.as_bytes()).unwrap();
+  f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
 }

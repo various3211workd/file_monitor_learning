@@ -35,6 +35,7 @@ fn main() {
     .unwrap_or_else(|e| e.exit());
 
   if args.flag_listen {
+    println!("[[Listen Monitoring]]");
     listen_server::run();
   }
   else {

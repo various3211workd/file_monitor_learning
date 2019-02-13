@@ -2,11 +2,12 @@ use std::io::*;
 use std::net::{TcpStream, SocketAddr, Shutdown};
 
 /*
-  read function
+  readFunc
 
-  return String
+  @param TcpStream stream
+  @return String
 */
-pub fn read(mut stream: TcpStream) -> String {
+pub fn readFunc(mut stream: TcpStream) -> String {
 
   let mut buf = vec![];
   loop {
@@ -25,9 +26,11 @@ pub fn read(mut stream: TcpStream) -> String {
 
 
 /*
-  send function
+  sendFunc
+
+  @param String line
 */
-pub fn send(line: String) {
+pub fn sendFunc(line: String) {
   let addrs = [
     SocketAddr::from(([127, 0, 0, 1], 12749)),
   ];

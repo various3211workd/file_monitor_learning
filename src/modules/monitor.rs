@@ -11,9 +11,9 @@ use std::sync::mpsc::channel;
 use super::*;
 
 /*
-  run function
+  run
 
-  start file monitor
+  @param String folder_name
 */
 pub fn run(folder_name: String){
   println!("[START Monitoring] {}", folder_name);
@@ -34,7 +34,7 @@ pub fn run(folder_name: String){
             op, 
             path);
         println!("{}", line);
-        network::send(line);
+        network::sendFunc(line);
       },
       Ok(event) => println!("broken event: {:?}", event),
       Err(e) => println!("watch error: {:?}", e),
