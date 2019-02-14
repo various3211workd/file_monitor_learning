@@ -6,7 +6,9 @@ use std::io::*;
 use super::*;
 
 /*
-  run
+  run function
+  
+  return None
 */
 pub fn run() {
   let addrs = [
@@ -33,8 +35,12 @@ pub fn run() {
   }
 }
 
+/*
+handle_connection function
+@param stream
+return None
+*/
 fn handle_connection(stream: TcpStream) {
-  let mut stream = stream;
   stream.set_nonblocking(true).expect("set_nonblocking call failed");
 
   let addr = stream.peer_addr().unwrap();
@@ -46,6 +52,7 @@ fn handle_connection(stream: TcpStream) {
       putfile(addr.to_string(), message);
     }
   }
+  println!("end");
 }
 
 // Puts Infomation on UsersFile
