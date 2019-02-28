@@ -11,7 +11,7 @@ use std::sync::mpsc::channel;
 use super::*;
 
 /*
-  run
+  run function
 
   @param String folder_name
 */

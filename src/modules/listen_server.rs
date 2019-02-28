@@ -37,7 +37,9 @@ pub fn run() {
 
 /*
 handle_connection function
+
 @param stream
+
 return None
 */
 fn handle_connection(stream: TcpStream) {
@@ -52,7 +54,6 @@ fn handle_connection(stream: TcpStream) {
       putfile(addr.to_string(), message);
     }
   }
-  println!("end");
 }
 
 // Puts Infomation on UsersFile
@@ -61,7 +62,7 @@ fn putfile(addr: String, message: String) {
   let filename = addr.split(":").collect::<Vec<&str>>();
 
   let mut f = BufWriter::new(
-    fs::OpenOptions::new().write(true).create(true).append(true).open(format!("{}{}", "log/".to_string(), filename[0])).unwrap());
+    fs::OpenOptions::new().write(true).create(true).append(true).open(format!("{}{}", "log/".to_string(), filename[0])).expect("[Error] log folder not found"));
 
   f.write(format!("{}{}", message, "\n".to_string()).as_bytes()).unwrap();
 }

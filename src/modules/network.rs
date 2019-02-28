@@ -5,7 +5,7 @@ use std::io::*;
 use std::net::{TcpStream, SocketAddr, Shutdown};
 
 /*
-  readFunc
+  readFunc function
 
   @param TcpStream stream
   @return String
@@ -29,7 +29,7 @@ pub fn readFunc(mut stream: TcpStream) -> String {
 
 
 /*
-  sendFunc
+  sendFunc function
 
   @param String line
 */
